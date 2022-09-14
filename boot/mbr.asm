@@ -1,15 +1,16 @@
 .init_stack:
-	;mov ax, 1440h
-	;mov ss, ax
-	mov esp, 14400h
+;	mov ax, 1A40h
+;	mov ss, ax
+	mov esp, 1A400h
 
 .mbr_start:
 	call biosvga_init
 
-	push 0h 	; SEGMENT
-	push s_mbr_start; OFFSET
-	push 28		; LENGTH
+	mov ax, 0h 		; SEGMENT
+	mov bx, s_mbr_start	; OFFSET
+	mov cx, 28		; LENGTH
 	call biosvga_write_info
+	call biosvga_cursor_newline
 
 .load_from_drive:
 
@@ -29,18 +30,18 @@
 	jc .read_error
 
 .mbr_done:
-	push 0h		; SEGMENT
-	push s_mbr_done	; OFFSET
-	push 30		; LENGTH
+	mov ax, 0h		; SEGMENT
+	mov bx, s_mbr_done	; OFFSET
+	mov cx, 30		; LENGTH
 	call biosvga_write_info
 
 .enter_stage2:
 	jmp 0000:7E00h
 
 .read_error:
-	push 0h		; SEGMENT
-	push s_mbr_error; OFFSET
-	push 31		; LENGTH
+	mov ax, 0h		; SEGMENT
+	mov bx, s_mbr_error	; OFFSET
+	mov cx, 31		; LENGTH
 	call biosvga_write_info
 
 	hlt
