@@ -20,7 +20,7 @@ biosvga_write_info:
         mov ah, 13h ; Write string
         mov al, 00000001b       ; Write mode
         mov bh, 0       ; page
-        mov bl, 0Bh     ; color light cyan
+        mov bl, 07h     ; color light gray
 
         int 10h
         pop bx
