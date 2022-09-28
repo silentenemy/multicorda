@@ -32,7 +32,9 @@ use32
 
 .pm_ok:
         mov esi, s_stage2_pm_ok
-        mov edi, 0B8000h+4*(160)
+        mov eax, 4*(160)
+        call memvga_cursor_virtual_set
+        call memvga_cursor_virtual_load
         mov ah, 07h
         call memvga_puts
 
@@ -41,6 +43,7 @@ use32
         mov ah, 0Bh
         call memvga_puts
         call memvga_cursor_disable
+        call memvga_cursor_virtual_newline
 
         jmp rsdp_lookup
 

@@ -9,37 +9,43 @@ rsdp_lookup:
         mov ebx, 1024
         call rsdp_find_signature
 
-        mov edi, 0B8000h+5*160
+;        mov edi, 0B8000h+5*160
+        call memvga_cursor_virtual_load
         mov ah, 07h
         cmp [rsdp], 0
         je .rsdp_not_found_in_ebda
+
         mov esi, s_rsdp_lookup_rsdp_found_1
         call memvga_puts
+        call memvga_cursor_virtual_newline
         jmp .lookup_finished
 
 .rsdp_not_found_in_ebda:
         mov esi, s_rsdp_lookup_rsdp_not_found_1
         call memvga_puts
+        call memvga_cursor_virtual_newline
 
         mov eax, 0E0000h
         mov ebx, 01FFFFh
         call rsdp_find_signature
 
-        mov edi, 0B8000h+6*160
+        call memvga_cursor_virtual_load
         mov ah, 07h
         cmp [rsdp], 0
         je .rsdp_not_found_in_mba
         mov esi, s_rsdp_lookup_rsdp_found_2
         call memvga_puts
+        call memvga_cursor_virtual_newline
         jmp .lookup_finished
 
 .rsdp_not_found_in_mba:
         mov esi, s_rsdp_lookup_rsdp_not_found_2
         call memvga_puts
+        hlt
 
 .lookup_finished:
         call rsdp_validate
-        mov edi, 0B8000h+7*160
+        call memvga_cursor_virtual_load
         mov ah, 07h
         cmp al, 0
         jne .rsdp_invalid
@@ -47,11 +53,13 @@ rsdp_lookup:
 .rsdp_valid:
         mov esi, s_rsdp_lookup_rsdp_valid
         call memvga_puts
+        call memvga_cursor_virtual_newline
         jmp .end
 
 .rsdp_invalid:
         mov esi, s_rsdp_lookup_rsdp_invalid
         call memvga_puts
+        call memvga_cursor_virtual_newline
         hlt
 
 .end:

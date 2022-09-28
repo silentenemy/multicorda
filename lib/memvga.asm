@@ -1,4 +1,5 @@
 include 'memvga_cursor.asm'
+include 'memvga_cursor_virtual.asm'
 
 memvga_putc:
         ; AX  = color:symbol word
