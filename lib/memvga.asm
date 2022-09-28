@@ -8,20 +8,9 @@ memvga_putc:
         ret
 
 memvga_puts:
-        ; [stack+4 ] = color byte
-        ; [stack+6 ] = source addr
-        ; [stack+10] = dest addr
-
-        ;push ebp
-        ;mov ebp, esp
-
-        ;push eax
-        ;push esi
-        ;push edi
-
-        ;mov ax, [ebp+4]
-        ;mov esi, [ebp+6]
-        ;mov edi, [ebp+10]
+        ; ds:esi = source
+        ; es:esi = destionation
+        ; ah     = color attribute
 
 .continue:
         lods byte [ds:esi]
@@ -31,10 +20,4 @@ memvga_puts:
         jmp .continue
 
 .return:
-        ;pop edi
-        ;pop esi
-        ;pop eax
-
-        ;mov esp, ebp
-        ;pop ebp
         ret

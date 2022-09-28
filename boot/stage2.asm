@@ -31,9 +31,6 @@ use32
         mov ss, ax
 
 .pm_ok:
-        ;push dword 0B8000h+154
-        ;push dword s_stage2_pm_ok
-        ;push word  0B00h
         mov esi, s_stage2_pm_ok
         mov edi, 0B8000h+4*(160)
         mov ah, 07h
@@ -44,9 +41,8 @@ use32
         mov ah, 0Bh
         call memvga_puts
         call memvga_cursor_disable
-        ;add esp, 9
 
-        hlt
+        jmp rsdp_lookup
 
 .defines:
         s_stage2_start db "stage2 started!"
