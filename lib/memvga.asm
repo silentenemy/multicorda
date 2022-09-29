@@ -22,3 +22,20 @@ memvga_puts:
 
 .return:
         ret
+
+memvga_puts_len:
+        ; ds:esi = source
+        ; es:esi = destionation
+        ; ah     = color attribute
+        ; ebx    = length
+
+.continue:
+        lods byte [ds:esi]
+        cmp ebx, 0
+        jz .return
+        stos word [es:edi]
+        dec ebx
+        jmp .continue
+
+.return:
+        ret
