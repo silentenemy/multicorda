@@ -50,14 +50,13 @@ rsdp_validate:
         add ecx, 20
 
 .round:
-        add eax, [ebx]
+        add al, [ebx]
         inc ebx
         cmp ebx, ecx
         jg .end
         jmp .round
 
 .end:
-        and eax, 000000FFh
         pop ecx
         pop ebx
         ret
