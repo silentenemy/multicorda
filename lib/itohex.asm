@@ -2,6 +2,8 @@ dtohex:
         ; ebx = int
         ; eax = output memory address
         push ecx
+        push edx
+        mov edx, 8
 
 .halfbyte:
         mov ecx, ebx
@@ -15,13 +17,32 @@ dtohex:
 
         shl ebx, 4              ; remove highest halfbyte from ebx by shifting
 
-        cmp ebx, 0
+        dec edx
+        cmp edx, 0
         jne .halfbyte
 
 .finished:
         sub eax, 4
+        pop edx
         pop ecx
         ret
 
-.defines:
-        hexbytes db "0123456789ABCDEF"
+bytetohex:
+        ; bl = int
+        ; eax = output memory address
+        push ecx
+        mov cl, bl
+        shr cl, 4
+        add ecx, hexbytes
+        mov cl, [ecx]
+        mov [eax], cl
+        inc eax
+        mov cl, bl
+        and cl, 0Fh
+        add ecx, hexbytes
+        mov cl, [ecx]
+        mov [eax], cl
+        dec eax
+        pop ecx
+        ret
+

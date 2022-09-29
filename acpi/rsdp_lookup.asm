@@ -58,12 +58,13 @@ rsdp_lookup:
 
 .rsdp_invalid:
         mov esi, s_rsdp_lookup_rsdp_invalid
+        mov ah, 0Bh
         call memvga_puts
         call memvga_cursor_virtual_newline
         hlt
 
 .end:
-        hlt
+        jmp parse_rsdt
 
 .defines:
         ebda_start dd 0

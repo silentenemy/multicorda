@@ -21,7 +21,7 @@
         mov bx, 0000h   ; buffer offset
 
         mov ah, 02h     ; Set operation to 'read sector'
-        mov al, 2       ; Read exactly TWO sectors
+        mov al, 4       ; Read exactly FOUR sectors
         mov dh, 0       ; on the first head
         mov ch, 0       ; first cylinder
         mov cl, 2       ; second sector
