@@ -12,6 +12,16 @@
         call biosvga_write_info
         call biosvga_cursor_newline
 
+.fast_a20_check:
+        in al, 92h
+        test al, 2
+        jnz .load_from_drive
+
+.fast_a20_enable:
+        or al, 2
+        and al, 0FEh
+        out 92h, al
+
 .load_from_drive:
 
         ; READ THE SECTOR NOW!
