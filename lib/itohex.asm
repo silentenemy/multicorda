@@ -27,18 +27,21 @@ dtohex:
         pop ecx
         ret
 
-bytetohex:
+btohex:
         ; bl = int
         ; eax = output memory address
         push ecx
-        mov cl, bl
-        shr cl, 4
-        add ecx, hexbytes
-        mov cl, [ecx]
-        mov [eax], cl
-        inc eax
-        mov cl, bl
-        and cl, 0Fh
+        xor ecx, ecx
+
+        mov cl, bl              ; cl = byte
+        shr cl, 4               ; cl is high halfbyte (F*h)
+        add ecx, hexbytes       ; ecx = hexbytes[high_halfbyte] = &(ASCII of high halfbyte)
+        mov cl, [ecx]           ; cl = ASCII of high halfbyte
+        mov [eax], cl           ; *(eax) = ASCII of high halfbyte
+        inc eax                 ; increment eax, now points to next symbol
+
+        mov cl, bl              ; cl = byte
+        and ecx, 0Fh             ; cl is low halfbyte (*Fh)
         add ecx, hexbytes
         mov cl, [ecx]
         mov [eax], cl
