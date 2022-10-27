@@ -56,7 +56,7 @@ parse_rsdt:
         call memvga_cursor_virtual_newline
 
         call madt_extract_length
-        jmp madt_count_cpus
+        jmp madt_handle_flags
 
 .madt_not_found:
         call memvga_cursor_virtual_load

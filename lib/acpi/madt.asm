@@ -8,6 +8,16 @@ madt_extract_length:
         pop eax
         ret
 
+madt_check_flags:
+        ; [madt] = MADT offset in memory
+        ; ZF = flags==0 (1 = Dual 8259 Legacy PICs installed, 0 = nope)
+
+        push eax
+        mov eax, [madt]
+        cmp dword [eax+28h], 0
+        pop eax
+        ret
+
 madt_detect_cores:
         ; [madt] = MADT offset in memory
         ; [madt_length] = size of MADT

@@ -1,3 +1,22 @@
+madt_handle_flags:
+        call madt_check_flags
+        jne .dual_legacy_pics
+
+.apic:
+        call memvga_cursor_virtual_load
+        mov esi, s_madt_masking_pic_interrupts
+        mov ah, 07h
+        call memvga_puts
+        call memvga_cursor_virtual_newline
+        jmp madt_count_cpus
+
+.dual_legacy_pics:
+        call memvga_cursor_virtual_load
+        mov esi, s_madt_dual_legacy_pics_present
+        mov ah, 07h
+        call memvga_puts
+        call memvga_cursor_virtual_newline
+
 madt_count_cpus:
 
         call madt_detect_cores
@@ -5,7 +24,7 @@ madt_count_cpus:
 .print_cores_num:
         mov  bl, [acpi_cpu_ids_length]
         mov eax, s_madt_count_cpus_num+17
-        call dtohex
+        call btohex
 
         call memvga_cursor_virtual_load
         mov esi, s_madt_count_cpus_num
@@ -33,7 +52,9 @@ madt_count_cpus:
         acpi_cpu_ids            dq 0
         acpi_cpu_ids_length     db 0
 
-        s_madt_count_cpus_num   db "Number of cores: ZZZZZZZZh"
+        s_madt_dual_legacy_pics_present db "Dual legacy PICs present!", 0
+        s_madt_masking_pic_interrupts db "MADT flags == 0, masking PIC interrupts", 0
+        s_madt_count_cpus_num   db "Number of cores: ZZh"
                                 db 0
         s_madt_count_cpus_ids   db "CPU core IDs: ........ ........"
                                 db 0
