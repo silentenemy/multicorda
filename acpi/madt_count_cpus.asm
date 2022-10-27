@@ -8,7 +8,7 @@ madt_handle_flags:
         mov ah, 07h
         call memvga_puts
         call memvga_cursor_virtual_newline
-        jmp madt_count_cpus
+        jmp .disable_pics
 
 .dual_legacy_pics:
         call memvga_cursor_virtual_load
@@ -17,8 +17,10 @@ madt_handle_flags:
         call memvga_puts
         call memvga_cursor_virtual_newline
 
-madt_count_cpus:
+.disable_pics:
+        call pic8259_disable
 
+madt_count_cpus:
         call madt_detect_cores
 
 .print_cores_num:
@@ -53,7 +55,7 @@ madt_count_cpus:
         acpi_cpu_ids_length     db 0
 
         s_madt_dual_legacy_pics_present db "Dual legacy PICs present!", 0
-        s_madt_masking_pic_interrupts db "MADT flags == 0, masking PIC interrupts", 0
+        s_madt_masking_pic_interrupts db "No legacy PICs found.", 0
         s_madt_count_cpus_num   db "Number of cores: ZZh"
                                 db 0
         s_madt_count_cpus_ids   db "CPU core IDs: ........ ........"

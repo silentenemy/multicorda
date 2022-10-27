@@ -45,6 +45,9 @@ use32
         call memvga_cursor_disable
         call memvga_cursor_virtual_newline
 
+.remap_pic_interrupts:
+        call pic8259_remap
+
         jmp rsdp_lookup
 
 .defines:

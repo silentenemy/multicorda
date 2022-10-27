@@ -19,6 +19,8 @@ include 'lib/acpi/rsdp.asm'
 include 'lib/acpi/rsdt.asm'
 include 'lib/acpi/madt.asm'
 
+include 'lib/pic8259.asm'
+
 include 'payload.asm'
 
 include 'lib/itohex.asm'
