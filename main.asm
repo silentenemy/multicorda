@@ -1,5 +1,7 @@
 format binary
 
+global_start:
+
 use16
 org 7C00h
 include 'boot/mbr.asm'
@@ -10,6 +12,7 @@ include 'boot/stage2.asm'
 include 'acpi/rsdp_lookup.asm'
 include 'acpi/parse_rsdt.asm'
 include 'acpi/madt_count_cpus.asm'
+include 'interrupts/init_interrupts.asm'
 
 include 'lib/gdt.asm'
 include 'lib/idt.asm'
@@ -20,9 +23,12 @@ include 'lib/acpi/rsdt.asm'
 include 'lib/acpi/madt.asm'
 
 include 'lib/pic8259.asm'
+include 'lib/interrupt_basic.asm'
 
 include 'payload.asm'
 
 include 'lib/itohex.asm'
 
 include 'lib/defines.asm'
+
+global_end:

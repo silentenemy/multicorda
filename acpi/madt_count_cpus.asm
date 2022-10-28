@@ -48,7 +48,7 @@ madt_count_cpus:
         call memvga_puts
         call memvga_cursor_virtual_newline
 
-        jmp payload
+        jmp load_idt
 
 .defines:
         acpi_cpu_ids            dq 0
