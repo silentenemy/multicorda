@@ -89,11 +89,11 @@ pic8259_eoi:
         jb .only_master
         push ax
         mov al, PIC_EOI
-        out PIC1, al
+        out PIC2, al
         pop ax
 .only_master:
         push ax
         mov al, PIC_EOI
-        out PIC2, al
+        out PIC1, al
         pop ax
         ret
