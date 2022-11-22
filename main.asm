@@ -15,15 +15,16 @@ include 'acpi/madt_count_cpus.asm'
 include 'interrupts/init_interrupts.asm'
 
 include 'lib/gdt.asm'
-include 'lib/idt.asm'
 include 'lib/memvga.asm'
 
 include 'lib/acpi/rsdp.asm'
 include 'lib/acpi/rsdt.asm'
 include 'lib/acpi/madt.asm'
 
-include 'lib/pic8259.asm'
-include 'lib/interrupt_basic.asm'
+include 'lib/interrupts/pic8259.asm'
+include 'lib/interrupts/interrupt_basic.asm'
+include 'lib/interrupts/idt.asm'
+include 'lib/interrupts/lapic.asm'
 
 include 'lib/keyboard/interrupt_keyboard.asm'
 
