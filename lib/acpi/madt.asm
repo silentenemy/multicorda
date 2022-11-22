@@ -50,18 +50,23 @@ madt_detect_cores:
         jmp .end
 
 .local_apic:
-        add eax, 2                      ; skip header
-        mov ebx, acpi_cpu_ids           ; load effective address of acpi_cpu_ids[]
-        mov bl, [acpi_cpu_ids_length]   ; ebx = acpi_cpu_ids[offset]
-        add ebx, acpi_cpu_ids
-        mov cl, [eax]                   ; store ACPI processor ID of current entry in cl first
-        mov [ebx], cl                   ; and then in acpi_cpu_ids[offset]
-        inc [acpi_cpu_ids_length]       ; increment offset
-        add eax, 6                      ; skip APIC ID and flags
+        add eax, 3                      ; skip header and ACPI CPU ID
+        mov ebx, lapic_ids           ; load effective address of lapic_ids[]
+        add ebx, dword [lapic_ids_length]   ; ebx = lapic_ids[offset]
+        mov cl, [eax]                   ; store (L)APIC ID of current entry in cl first
+        mov [ebx], cl                   ; and then in lapic_ids[offset]
+        inc [lapic_ids_length]       ; increment offset
+        add eax, 5                      ; skip flags
         jmp .end_round
 
 .io_apic:
-        add eax, 12
+        add eax, 4
+        mov ecx, [eax]
+        mov [ioapic_address], ecx
+        add eax, 4
+        mov ecx, [eax]
+        mov [ioapic_gsib], ecx
+        add eax, 4
         jmp .end_round
 
 .int_source_override:
@@ -97,3 +102,5 @@ madt_detect_cores:
 
 .defines:
         madt_end                dd 0
+        ioapic_address          dd 0
+        ioapic_gsib             dd 0
