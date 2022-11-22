@@ -4,16 +4,20 @@ load_idt:
 
 .update_handlers:
 
-        mov eax, 1
-        mov ebx, int1h_handler
+        mov eax, 8h
+        mov ebx, int8h_handler
         call idt_change_handler
 
-        mov eax, 13
-        mov ebx, int13h_handler
+        mov eax, 0Dh
+        mov ebx, int0dh_handler
         call idt_change_handler
 
         mov eax, 21h
         mov ebx, int21h_handler
+        call idt_change_handler
+
+        mov eax, 20h
+        mov ebx, int20h_handler
         call idt_change_handler
 
         jmp payload
