@@ -38,7 +38,7 @@ pic8259_remap:
 
         ; ICW1
         mov al, PIC_ICW1_INIT
-        and al, PIC_ICW1_ICW4
+        or al, PIC_ICW1_ICW4
         out PIC1, al
         call pic8259_iowait
         out PIC2, al
