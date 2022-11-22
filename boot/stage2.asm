@@ -24,7 +24,7 @@
 
 use32
 .fix_segment_registers:
-        mov eax, gdt_data-gdt_start    ; then fix registers
+        mov eax, 10h    ; then fix registers
         mov ds, ax
         mov es, ax
         mov fs, ax

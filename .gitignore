@@ -1,5 +1,4 @@
 bx_enh_dbg.ini
 main.bin
-bochsrc.bxrc
-bochsrc.bxrc.idb
+bochsrc.*
 main.bin.idb
