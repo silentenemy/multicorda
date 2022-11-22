@@ -83,3 +83,17 @@ pic8259_disable:
         out PIC2_DATA, al
         pop ax
         ret
+
+pic8259_eoi:
+        cmp ax, 8
+        jb .only_master
+        push ax
+        mov al, PIC_EOI
+        out PIC1, al
+        pop ax
+.only_master:
+        push ax
+        mov al, PIC_EOI
+        out PIC2, al
+        pop ax
+        ret

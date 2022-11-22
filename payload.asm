@@ -1,7 +1,11 @@
 payload:
-        int 1h
-        int 13h
-        int 0h
+
+.unmask_kbd:
+        ;mov al, 0FEh
+        mov al, 00h
+        out PIC1_DATA, al
+        sti
+        jmp payload
         hlt
 
 .defines:

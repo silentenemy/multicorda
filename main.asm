@@ -25,6 +25,8 @@ include 'lib/acpi/madt.asm'
 include 'lib/pic8259.asm'
 include 'lib/interrupt_basic.asm'
 
+include 'lib/keyboard/interrupt_keyboard.asm'
+
 include 'payload.asm'
 
 include 'lib/itohex.asm'
