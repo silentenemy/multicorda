@@ -8,7 +8,7 @@ lapic_eoi:
         mov ebx, LAPIC+100h  ; ISR registers of LAPIC have indices 0x10 - 0x17
 
 .round:
-        cmp [ebx], 0
+        cmp dword [ebx], 0
         jnz .send_eoi   ; jnz = has at least one bit =1
         add ebx, 10h
         cmp ebx, LAPIC+180h ; all registers have been checked, ISR is not modified
@@ -16,7 +16,7 @@ lapic_eoi:
         jmp .round
 
 .send_eoi:
-        mov [LAPIC_EOIR], 1
+        mov dword [LAPIC_EOIR], 1
         jmp .end
 
 .isr_not_modified:
