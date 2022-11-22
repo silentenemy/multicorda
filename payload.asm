@@ -1,5 +1,7 @@
 payload:
-        int 1
+        int 1h
+        int 13h
+        int 0h
         hlt
 
 .defines:

@@ -15,23 +15,19 @@ idt_fill_48:
         xor eax, eax
         xor ebx, ebx
         xor ecx, ecx
-        mov edx, 64
+        mov edx, 8
 
 .get_entry_offset:
         mov eax, ebx
         mul dl
 
 .fill_entry:
-        mov ecx, int1h_handler
-        mov [idt_start+eax], cx ; bytes 0-15
-        ;mov cx, 08E00h ; P + DPL + Gate Type + 00h (reserved)
-        ;mov [idt_start+eax+4], ecx ; bytes 32-63
-        ;mov cx, 08h
-        ;mov [idt_start+eax+2], cx ; bytes 16-31
-        mov word [idt_start+eax+4], 08E00h
-        mov word [idt_start+eax+2], 0008h
+        mov ecx, interrupt_handler_stub
+        mov word [ds:idt_start+eax], cx
+        mov word [ds:idt_start+eax+4], 08E00h ; P + DPL + Gate Type + 00h (reserved)
+        mov word [ds:idt_start+eax+2], 0008h  ; code segment selector
         shr ecx, 16
-        mov [idt_start+eax+6], cx
+        mov word [ds:idt_start+eax+6], cx
 
         inc ebx
         cmp ebx, 48
@@ -53,7 +49,7 @@ idt_change_handler:
         push ebx
         push ecx
 
-        mov cx, 64
+        mov cx, 8
         mul cl
 
         mov [idt_start+eax], bx
