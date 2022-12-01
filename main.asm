@@ -27,6 +27,7 @@ include 'lib/interrupts/idt.asm'
 include 'lib/interrupts/lapic.asm'
 
 include 'lib/keyboard/interrupt_keyboard.asm'
+include 'lib/keyboard/scancodes.asm'
 
 include 'payload.asm'
 
