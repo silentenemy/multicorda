@@ -4,6 +4,10 @@ load_idt:
 
 .update_handlers:
 
+        mov eax, 0h
+        mov ebx, int0h_handler
+        call idt_change_handler
+
         mov eax, 8h
         mov ebx, int8h_handler
         call idt_change_handler
