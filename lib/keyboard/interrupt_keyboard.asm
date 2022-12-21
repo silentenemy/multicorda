@@ -1,14 +1,15 @@
 int21h_handler:
         cli
+        xchg bx, bx
         pushf
         push eax
         push ebx
-        mov al, 1h
-        call pic8259_eoi
+
+        xor eax, eax
+        xor ebx, ebx
 
         in al, 60h
 
-        xor ebx, ebx
         mov bl, al
         add ebx, sc_keypresses
 
@@ -48,6 +49,9 @@ int21h_handler:
 .long_code:
 
 .end:
+        mov al, 1h
+        call pic8259_eoi
+
         pop ebx
         pop eax
         popf
