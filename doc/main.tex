@@ -1,0 +1,68 @@
+\documentclass{book}
+
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtext}
+
+\usepackage{cmap}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage[version=4]{mhchem}
+
+\frontmatter
+
+\title{multicorda\\Техническая документация}
+\author{Денис Еманов}
+\date{28.12.2022}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\input{pages/0-preamble.tex}
+
+\mainmatter
+
+\input{pages/1-mainfeatures.tex}
+
+\input{pages/2-installation.tex}
+
+\input{pages/3-modules.tex}
+
+\input{pages/4-interestingmoments.tex}
+
+\backmatter
+
+\begin{thebibliography}{9}
+
+\bibitem{fasmmanual}
+  Flat Assembler 1.73 Programmer's Manual,\\
+  \verb|https://flatassembler.net/docs.php?article=manual|
+  (дата обращения: 28.12.2022)
+
+\bibitem{rsdp}
+  \verb|https://wiki.osdev.org/RSDP|
+
+\bibitem{rsdt}
+  \verb|https://wiki.osdev.org/RSDT|
+
+\bibitem{madt}
+  \verb|https://wiki.osdev.org/MADT|
+
+\bibitem{idt}
+  \verb|https://wiki.osdev.org/IDT|\\
+  \verb|https://wiki.osdev.org/IDT_problems|
+
+\bibitem{apics}
+  \verb|https://ethv.net/workshops/osdev/notes/notes-3.html|\\
+  \verb|https://wiki.osdev.org/APIC|
+
+\bibitem{exceptions}
+  \verb|https://wiki.osdev.org/Exceptions|
+
+\end{thebibliography}
+
+\end{document}

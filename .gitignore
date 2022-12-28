@@ -3,3 +3,10 @@ main.bin
 bochsrc.*
 main.bin.idb
 *.bxrc
+
+# LaTeX
+*.pdf
+*.log
+*.aux
+*.gz
+*.toc
